@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'type', 'bio', 'photo',
+        'first_name','last_name','business_name', 'email', 'password', 'type', 'photo',
     ];
 
     /**
@@ -37,4 +37,16 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function jobposts()
+    {
+        return $this->hasMany(JobPost::class);
+    }
+
+
+    public function applies()
+    {
+        return $this->hasMany(JobApply::class);
+    }
 }

@@ -21,21 +21,21 @@ class UserController extends Controller
     public function index()
     {
         // $this->authorize('isAdmin');
-        if (Gate::allows('isAdmin') || Gate::allows('isSuperAdmin') || Gate::allows('isAuthor')) {
+        if (Gate::allows('isAdmin')) {
             // The current user can edit
-            return User::latest()->paginate(10);
+            return User::latest()->paginate(15);
         }
     }
 
     public function search()
     {
         if($search = \Request::get('q')){
-            $users = User::where('name', 'LIKE', "%$search%")
+            $users = User::where('first_name', 'LIKE', "%$search%")
+                        ->orWhere('last_name', 'LIKE', "%$search%")
                         ->orWhere('email', 'LIKE', "%$search%")
-                        ->orWhere('type', 'LIKE', "%$search%")
-                        ->paginate(10);
+                        ->paginate(30);
         }else{
-            $users = User::latest()->paginate(10);
+            $users = User::latest()->paginate(30);
         }
         return $users;
     }
@@ -44,18 +44,20 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|string|unique:users|max:50',
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|min:6|max:255',
             'type' => 'required',
         ]);
 
         return User::create([
-            'name' => $request['name'],
+            'first_name' => $request['first_name'],
+            'last_name' => $request['last_name'],
+            'business_name' => $request['business_name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
             'type' => $request['type'],
-            'bio' => $request['bio'],
             'photo' => 'boy.png',
         ]);
     }
@@ -70,7 +72,8 @@ class UserController extends Controller
         $user = auth("api")->user();
 
         $this->validate($request, [
-            'name' => 'required|string|max:50|unique:users,name,'.$user->id,
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
             'password' => 'sometimes|required|min:6|max:255',
         ]);
@@ -107,10 +110,10 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         $this->validate($request, [
-            'name' => 'required|string|max:50|unique:users,name,'.$user->id,
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
             'email' => 'required|string|email|max:191|unique:users,email,'.$user->id,
             'password' => 'sometimes|min:6|max:255',
-            'type' => 'required',
         ]);
 
         $user->update($request->all());        
