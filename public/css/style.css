@@ -1,0 +1,16 @@
+.router-link-exact-active,
+.nav-link:focus {
+    background: rgb(0, 180, 39) !important;
+    color: white !important;
+}
+
+@media print {
+    .print-hide {
+        display: none;
+    }
+}
+
+@page {
+    margin: 0;
+    padding: 0;
+}
