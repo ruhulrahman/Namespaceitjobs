@@ -11,7 +11,7 @@ class JobApply extends Model
     protected $with = ['user','job'];
 
     protected $fillable = [
-        'user_id','resume','skills',
+        'job_id', 'user_id',
     ];
 
     protected $primaryKey = 'id';

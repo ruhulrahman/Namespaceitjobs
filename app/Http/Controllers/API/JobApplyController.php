@@ -22,17 +22,29 @@ class JobApplyController extends Controller
 
     public function store(Request $request)
     {
-        $user_id = auth("api")->user()->id;
+        // $user_id = auth("api")->user()->id;
 
-        return JobApply::create([
-            'job_id' => $request['job_id'],
-            'user_id' => $user_id,
-        ]);
+        // return JobApply::create([
+        //     'job_id' => $request['job_id'],
+        //     'user_id' => $user_id,
+        // ]);
     }
 
     public function show($id)
     {
-        //
+        $user_id = auth("api")->user()->id;
+
+        return JobApply::create([
+            'job_id' => $id,
+            'user_id' => $user_id,
+        ]);
+    }
+
+    public function jobapplyCheck($jobid)
+    {
+        $user_id = auth("api")->user()->id;
+
+        return JobApply::where('job_id', $jobid)->where('user_id', $user_id)->pluck('job_id');
     }
 
 

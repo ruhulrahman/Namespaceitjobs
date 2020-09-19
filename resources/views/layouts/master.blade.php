@@ -109,7 +109,7 @@
               </p>
             </router-link>
           </li>
-
+          
           <li class="nav-item">
             <router-link to="/find-job" class="nav-link">
               <i class="nav-icon fas fa-user default"></i>
@@ -118,6 +118,7 @@
               </p>
             </router-link>
           </li>
+          
 
           @canany(['isAdmin','isAuthor', 'isSuperAdmin'])
           <li class="nav-item">
@@ -205,10 +206,10 @@
   <!-- /.content-wrapper -->
   
   <footer class="main-footer">
-    <strong>Copyright &copy; Software developed by <a href="http://adminlte.io">Ruhul Amin</a>.</strong>
+    <strong>Copyright &copy; Software developed by <a href="http://www.facebook.com/Ruhul14.02">Ruhul Amin</a>.</strong>
     All rights reserved.
     <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.0
+      <b>Version</b> 1.0
     </div>
   </footer>
 

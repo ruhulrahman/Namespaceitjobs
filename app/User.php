@@ -11,11 +11,8 @@ class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    // protected $with = ['profile'];
+
     protected $fillable = [
         'first_name','last_name','business_name', 'email', 'password', 'type', 'photo',
     ];
@@ -48,5 +45,10 @@ class User extends Authenticatable
     public function applies()
     {
         return $this->hasMany(JobApply::class);
+    }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
     }
 }

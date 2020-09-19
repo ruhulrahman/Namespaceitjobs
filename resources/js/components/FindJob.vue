@@ -52,6 +52,7 @@
                               <table id="example1" class="table table-bordered table-striped dataTable table-head-fixed" role="grid" aria-describedby="example1_info">
                 <thead>
                     <tr role="row" class="purple">
+                        <th>Sl.</th>
                         <th>Job Title</th>
                         <th>Salary</th>
                         <th>Action</th>
@@ -59,11 +60,12 @@
                 </thead>
                 <tbody>
                     <tr role="row" class="odd" v-for="(job, index) in jobs" :key="index">
+                        <td>{{ index+1 }}</td>
                         <td><router-link :to="/job-details/+job.id">{{ job.job_title }}</router-link></td>
                         <td>{{ job.salary }}</td>
 
                         <td>
-                            <a href="#" @click.prevent="deletejob(job.id)" class="btn btn-success">Job Apply</a>
+                            <router-link :to="/job-details/+job.id" class="btn btn-primary">Job View Details</router-link>
                         </td>
 
                     </tr>
@@ -103,6 +105,7 @@
                 editMode:false,
                 jobs:{},
                 sl:0,
+                applyCheck:'',
                 form: new Form({
                     id: '',
                     job_title: '',
@@ -144,37 +147,7 @@
             resetData(){
                 this.form.reset();
             },
-            deletejob(id){
-                swal.fire({
-                    title: 'Are you sure?',
-                    text: "You won't be able to revert this!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.value) {
-                        //send to server
-                        axios.delete('api/jobpost/'+id)
-                        .then(()=>{
-                            Fire.$emit('AfterDeleted');
-                            swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                            )
-                        })
-                        .catch(()=>{
-                            swal.fire(
-                                'Failed!',
-                                'Something wrong here.',
-                                'error'
-                                )
-                        })
-                    }
-                })
-            },
+
             addNewjobModalOpen(){
                 this.editMode = false;
                 this.form.reset()

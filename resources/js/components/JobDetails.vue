@@ -50,7 +50,9 @@
                           <div class="row">
                              <div class="col-sm-12" >
 <div>
-                                 <h2>Job Title: {{ job.job_title }}</h2>
+                                 <h2>Comany Name: <span class="text-primary">{{ job.user.business_name }}</span></h2>
+                                 <br>
+                                 <h2>Job Title: <span class="text-danger">{{ job.job_title }}</span></h2>
                                  <br>
                                  <h3>Job Description: </h3>
                                  <p>{{ job.job_description }}</p>
@@ -64,7 +66,12 @@
                                  <h3>Country: </h3>
                                  <p>{{ job.country }}</p>
                                  <br>
-
+                                <p class="text-center" v-if="job.id==apply">
+                                    <span class="btn btn-primary">Applied</span>
+                                </p>
+                                <p class="text-center" v-else>
+                                    <a href="#" @click.prevent="jobApply()" class="btn btn-success">Apply</a>
+                                </p>
 </div>
               </div>
               </div>
@@ -96,6 +103,8 @@
             return{
                 editMode:false,
                 job:{},
+                apply:{},
+                show:true,
                 sl:0,
             }
         },
@@ -129,6 +138,25 @@
             },
             resetData(){
                 this.form.reset();
+            },
+            jobApply(){
+                //send to server
+                axios.get('/api/jobapply/'+this.$route.params.id)
+                .then(()=>{
+                    Fire.$emit('AfterCreated');
+                    swal.fire(
+                    'Applied!',
+                    'success'
+                    )
+                })
+                .catch(()=>{
+                    swal.fire(
+                        'Failed!',
+                        'Something wrong here.',
+                        'error'
+                        )
+                })
+                this.loadjobs();
             },
             deletejob(id){
                 swal.fire({
@@ -197,6 +225,11 @@
                  axios.get('/api/jobpost/'+this.$route.params.id)
                  .then(response => {
                         this.job = response.data;
+                    });
+
+                 axios.get('/api/jobapplyCheck/'+this.$route.params.id)
+                 .then(response => {
+                        this.apply = response.data;
                     });
             }
         },

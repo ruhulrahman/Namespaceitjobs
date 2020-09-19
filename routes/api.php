@@ -29,6 +29,9 @@ Route::apiResources([
 Route::get('profile', 'API\UserController@profile');
 Route::put('profile', 'API\UserController@updateProfile');
 
+//JOb Apply Check
+Route::get('jobapplyCheck/{id}', 'API\JobApplyController@jobapplyCheck');
+
 //Search Users
 Route::get('findUser', 'API\UserController@search');
 Route::get('findjob', 'API\JobPostController@search');

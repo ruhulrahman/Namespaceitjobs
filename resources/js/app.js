@@ -64,11 +64,10 @@ Vue.use(VueRouter)
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     // { path: '/users', component: require('./components/Users.vue').default },
-    // { path: '/profile', component: require('./components/Profile.vue').default },
+    { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/job-post', component: require('./components/JobPost.vue').default },
     { path: '/find-job', component: require('./components/FindJob.vue').default },
     { path: '/job-details/:id', component: require('./components/JobDetails.vue').default },
-    // { path: '/developer', component: require('./components/Developer.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default },
 ]
 

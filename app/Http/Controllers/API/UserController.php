@@ -70,7 +70,9 @@ class UserController extends Controller
 
     public function profile()
     {
-        return auth("api")->user();
+        // return auth("api")->user();
+        
+        return User::where('id', auth("api")->user()->id)->first();
     }
 
     public function updateProfile(Request $request)
