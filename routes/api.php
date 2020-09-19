@@ -19,7 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResources([
-    'user' => 'API\UserController'
+    'user' => 'API\UserController',
+    'jobapply' => 'API\JobApplyController',
+    'jobpost' => 'API\JobPostController',
+    'profile' => 'API\ProfileController',
 ]);
 
 
@@ -28,3 +31,4 @@ Route::put('profile', 'API\UserController@updateProfile');
 
 //Search Users
 Route::get('findUser', 'API\UserController@search');
+Route::get('findjob', 'API\JobPostController@search');

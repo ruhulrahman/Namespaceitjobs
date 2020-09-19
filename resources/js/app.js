@@ -63,9 +63,12 @@ Vue.use(VueRouter)
 
 let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
-    { path: '/users', component: require('./components/Users.vue').default },
-    { path: '/profile', component: require('./components/Profile.vue').default },
-    { path: '/developer', component: require('./components/Developer.vue').default },
+    // { path: '/users', component: require('./components/Users.vue').default },
+    // { path: '/profile', component: require('./components/Profile.vue').default },
+    { path: '/job-post', component: require('./components/JobPost.vue').default },
+    { path: '/find-job', component: require('./components/FindJob.vue').default },
+    { path: '/job-details/:id', component: require('./components/JobDetails.vue').default },
+    // { path: '/developer', component: require('./components/Developer.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default },
 ]
 
@@ -116,26 +119,22 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-//Vue.component('/dashboard', require('./components/Dashboard.vue'));
-//Vue.component('/profile', require('./components/Profile.vue'));
 
+// //Passposrt component
+// Vue.component(
+//     'passport-clients',
+//     require('./components/passport/Clients.vue').default
+// );
 
-//Passposrt component
-Vue.component(
-    'passport-clients',
-    require('./components/passport/Clients.vue').default
-);
+// Vue.component(
+//     'passport-authorized-clients',
+//     require('./components/passport/AuthorizedClients.vue').default
+// );
 
-Vue.component(
-    'passport-authorized-clients',
-    require('./components/passport/AuthorizedClients.vue').default
-);
-
-Vue.component(
-    'passport-personal-access-tokens',
-    require('./components/passport/PersonalAccessTokens.vue').default
-);
+// Vue.component(
+//     'passport-personal-access-tokens',
+//     require('./components/passport/PersonalAccessTokens.vue').default
+// );
 
 
 //My component

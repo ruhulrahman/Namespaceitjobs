@@ -48,8 +48,14 @@ class UserController extends Controller
             'last_name' => 'required|string',
             'email' => 'required|string|email|unique:users|max:255',
             'password' => 'required|min:6|max:255',
-            'type' => 'required',
         ]);
+        $type = "";
+        if($request['business_name']!=""){
+            $type = "employer";
+        }else{
+            $type = "employee";
+        }
+        
 
         return User::create([
             'first_name' => $request['first_name'],
@@ -57,7 +63,7 @@ class UserController extends Controller
             'business_name' => $request['business_name'],
             'email' => $request['email'],
             'password' => Hash::make($request['password']),
-            'type' => $request['type'],
+            'type' => $type,
             'photo' => 'boy.png',
         ]);
     }

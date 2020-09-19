@@ -43,9 +43,20 @@ class JobPostController extends Controller
         ]);
     }
 
+    public function search()
+    {
+        if($search = \Request::get('q')){
+            $query = JobPost::where('job_title', 'LIKE', "%$search%")
+                        ->paginate(30);
+        }else{
+            $query = JobPost::latest()->paginate(30);
+        }
+        return $query;
+    }
+
     public function show($id)
     {
-        //
+        return JobPost::where('id', $id)->first();
     }
 
 
