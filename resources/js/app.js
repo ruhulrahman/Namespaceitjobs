@@ -68,6 +68,7 @@ let routes = [
     { path: '/job-post', component: require('./components/JobPost.vue').default },
     { path: '/find-job', component: require('./components/FindJob.vue').default },
     { path: '/job-details/:id', component: require('./components/JobDetails.vue').default },
+    { path: '/job-details-applicants/:id', component: require('./components/ApplicantsView.vue').default },
     { path: '*', component: require('./components/NotFound.vue').default },
 ]
 

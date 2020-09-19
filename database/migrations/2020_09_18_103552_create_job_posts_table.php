@@ -17,7 +17,7 @@ class CreateJobPostsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('user_id');
             $table->string('job_title');
-            $table->string('job_description');
+            $table->longText('job_description');
             $table->integer('salary');
             $table->string('location');
             $table->string('country');

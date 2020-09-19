@@ -11,7 +11,8 @@ class ProfileController extends Controller
 
     public function index()
     {
-        return Profile::all();
+        $user = auth("api")->user();
+        return Profile::where('user_id', $user->id)->first();
     }
 
 
@@ -53,8 +54,7 @@ class ProfileController extends Controller
         $profile = Profile::findOrFail($id);
 
         $this->validate($request, [
-            'resume' => 'required|string',
-            'skills' => 'required|string',
+            'skills' => 'string',
         ]);
 
         $profile->update($request->all());  

@@ -22,15 +22,17 @@ Route::apiResources([
     'user' => 'API\UserController',
     'jobapply' => 'API\JobApplyController',
     'jobpost' => 'API\JobPostController',
-    'profile' => 'API\ProfileController',
+    'userprofile' => 'API\ProfileController',
 ]);
 
 
 Route::get('profile', 'API\UserController@profile');
 Route::put('profile', 'API\UserController@updateProfile');
+Route::get('jobpostByAuth', 'API\JobPostController@jobpostByAuth');
 
 //JOb Apply Check
 Route::get('jobapplyCheck/{id}', 'API\JobApplyController@jobapplyCheck');
+Route::get('jobapplicants/{id}', 'API\JobApplyController@jobapplicants');
 
 //Search Users
 Route::get('findUser', 'API\UserController@search');

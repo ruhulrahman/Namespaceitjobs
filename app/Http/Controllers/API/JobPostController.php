@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\Controllers\Controller;
+use App\User;
 use App\JobPost;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class JobPostController extends Controller
 {
@@ -57,6 +58,13 @@ class JobPostController extends Controller
     public function show($id)
     {
         return JobPost::where('id', $id)->first();
+    }
+
+    public function jobpostByAuth()
+    {
+        $user_id = auth("api")->user()->id;
+        // $user = User::find($user_id);
+        return JobPost::where('user_id', $user_id)->get();
     }
 
 

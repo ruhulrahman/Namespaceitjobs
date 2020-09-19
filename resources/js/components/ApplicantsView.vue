@@ -6,11 +6,12 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Dashboard</h1>
+            <h1 class="m-0 text-dark">Job Details</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><router-link to="/dashboard">Dashboard</router-link></li>
+              <li class="breadcrumb-item"><router-link to="/home">Home</router-link></li>
+              <li class="breadcrumb-item active">Job Details</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -26,7 +27,7 @@
                 <div class="card">
 
             <div class="card-header print-hide">
-                <h3 class="card-title green">Dashboard</h3>
+                <h3 class="card-title green">Details</h3>
 
                 <div class="card-tools">
 
@@ -47,31 +48,32 @@
                     </div>
                   </div>
                           <div class="row">
-                             <div class="col-sm-12">
-                              <table id="example1" class="table table-bordered table-striped dataTable table-head-fixed" role="grid" aria-describedby="example1_info">
-                <thead>
-                    <tr role="row" class="purple">
-                        <th>Sl.</th>
-                        <th>Job Title</th>
-                        <th>Salary</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr role="row" class="odd" v-for="(job, index) in jobs" :key="index">
-                        <td>{{ index+1 }}</td>
-                        <td><router-link :to="/job-details/+job.id">{{ job.job_title }}</router-link></td>
-                        <td>{{ job.salary }}</td>
+                             <div class="col-sm-12" >
+<div>
+                                 <h2>Comany Name: <span class="text-primary">{{ job.user.business_name }}</span></h2>
+                                 <br>
+                                 <h2>Job Title: <span class="text-danger">{{ job.job_title }}</span></h2>
+                                 <br>
+                                 <h3>Job Description: </h3>
+                                 <p>{{ job.job_description }}</p>
+                                 <br>
+                                 <h3>Salary: </h3>
+                                 <p>{{ job.salary }}</p>
+                                 <br>
+                                 <h3>Location: </h3>
+                                 <p>{{ job.location }}</p>
+                                 <br>
+                                 <h3>Country: </h3>
+                                 <p>{{ job.country }}</p>
+                                 <br>
+ 
+</div>
+                                <hr>
 
-                        <td>
-                            <router-link :to="/job-details-applicants/+job.id" class="btn btn-primary">Applicants View</router-link>
-                        </td>
-
-                    </tr>
-                </tbody>
-              </table>
-
-
+                                 
+                                 <ul v-for="(user, index) in applicants.user" :key="index">
+                                     <li><router-link :to="/user-details/+user.id">{{ user.first_name }}</router-link></li>
+                                 </ul>
               </div>
               </div>
 
@@ -86,7 +88,6 @@
 
 
         <!-- Modal -->
-        
 
     </div>
 
@@ -102,17 +103,10 @@
         data(){
             return{
                 editMode:false,
-                jobs:{},
+                job:{},
+                applicants:{},
+                show:true,
                 sl:0,
-                applyCheck:'',
-                form: new Form({
-                    id: '',
-                    job_title: '',
-                    job_description: '',
-                    salary: '',
-                    location: '',
-                    country: '',
-                })
             }
         },
         methods: {
@@ -146,7 +140,56 @@
             resetData(){
                 this.form.reset();
             },
-
+            jobApply(){
+                //send to server
+                axios.get('/api/jobapply/'+this.$route.params.id)
+                .then(()=>{
+                    Fire.$emit('AfterCreated');
+                    swal.fire(
+                    'Applied!',
+                    'success'
+                    )
+                })
+                .catch(()=>{
+                    swal.fire(
+                        'Failed!',
+                        'Something wrong here.',
+                        'error'
+                        )
+                })
+                this.loadjobs();
+            },
+            deletejob(id){
+                swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        //send to server
+                        axios.delete('api/jobpost/'+id)
+                        .then(()=>{
+                            Fire.$emit('AfterDeleted');
+                            swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                            )
+                        })
+                        .catch(()=>{
+                            swal.fire(
+                                'Failed!',
+                                'Something wrong here.',
+                                'error'
+                                )
+                        })
+                    }
+                })
+            },
             addNewjobModalOpen(){
                 this.editMode = false;
                 this.form.reset()
@@ -180,11 +223,16 @@
 
             },
             loadjobs(){
-                 axios.get('api/jobpostByAuth')
+                 axios.get('/api/jobpost/'+this.$route.params.id)
                  .then(response => {
-                        this.jobs = response.data;
+                        this.job = response.data;
                     });
-            },
+
+                 axios.get('/api/jobapplicants/'+this.$route.params.id)
+                 .then(response => {
+                        this.applicants = response.data;
+                    });
+            }
         },
         created() {
             Fire.$on("searching", ()=> {
@@ -208,6 +256,7 @@
         },
         mounted() {
             console.log('Component mounted.')
+            console.log(this.$route.params.id)
             // Fetch initial results
             //this.getResults();
         }

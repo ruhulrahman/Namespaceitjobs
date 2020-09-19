@@ -47,6 +47,16 @@ class JobApplyController extends Controller
         return JobApply::where('job_id', $jobid)->where('user_id', $user_id)->pluck('job_id');
     }
 
+    public function jobapplicants($jobid)
+    {
+        // $user_id = auth("api")->user()->id;
+        // $job = JobPost::find($jobid);
+
+        return JobApply::where('job_id', $jobid)->get();
+
+        // return $job->applies();
+    }
+
 
     public function edit($id)
     {

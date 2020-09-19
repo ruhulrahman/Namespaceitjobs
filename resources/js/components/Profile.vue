@@ -68,6 +68,8 @@
                       <div class="form-group row">
                         <label for="last_name" class="col-sm-2 col-form-label">resume</label>
                         <div class="col-sm-10">
+                          <input type="file" @change="previewProfilePhoto" class="form-control-file" id="inputProfilePhoto">
+
                           <input type="text" v-model="profile_form.resume" class="form-control" id="resume" placeholder="resume" :class="{ 'is-invalid': profile_form.errors.has('resume') }">
                           <has-error :form="profile_form" field="resume"></has-error>
                         </div>
@@ -150,8 +152,7 @@
             updateProfile(){
               this.$Progress.start()
                 this.form.put("api/profile")
-                    .then(()=>{
-                      
+                    .then(()=>{                      
                       toast.fire({
                         icon: 'success',
                         title: 'Profile updated successfully'
@@ -162,7 +163,7 @@
                       this.$Progress.fail()
                     });
 
-                this.profile_form.post("api/profile")
+                this.profile_form.put("api/userprofile/"+this.profile_form.id)
                     .then(()=>{                      
                       toast.fire({
                         icon: 'success',
@@ -195,6 +196,7 @@
         },
         created() {
             axios.get('api/profile').then(({ data }) => { this.form.fill(data) });
+            axios.get('api/userprofile').then(({ data }) => { this.profile_form.fill(data) });
 
         },
         mounted() {

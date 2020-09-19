@@ -20,4 +20,9 @@ class JobPost extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function applies()
+    {
+        return $this->hasMany(JobApply::class);
+    }
 }

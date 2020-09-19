@@ -27,6 +27,13 @@ class UserController extends Controller
         }
     }
 
+    // public function jobpostByAuth()
+    // {
+    //     $user_id = auth("api")->id();
+    //     $user = User::find($user_id);
+    //     return $user->jobposts()->get();
+    // }
+
     public function search()
     {
         if($search = \Request::get('q')){
@@ -72,7 +79,7 @@ class UserController extends Controller
     {
         // return auth("api")->user();
         
-        return User::where('id', auth("api")->user()->id)->first();
+        return User::with('profile')->where('id', auth("api")->user()->id)->first();
     }
 
     public function updateProfile(Request $request)
