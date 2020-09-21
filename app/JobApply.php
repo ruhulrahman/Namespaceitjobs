@@ -8,7 +8,7 @@ class JobApply extends Model
 {
     protected $table = 'job_applies';
 
-    protected $with = ['user','job'];
+    protected $with = ['user'];
 
     protected $fillable = [
         'job_id', 'user_id',
@@ -18,6 +18,12 @@ class JobApply extends Model
 
 
     public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+
+    public function applicant()
     {
         return $this->belongsTo(User::class);
     }
