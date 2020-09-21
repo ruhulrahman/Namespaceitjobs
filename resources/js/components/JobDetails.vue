@@ -103,6 +103,11 @@
             return{
                 editMode:false,
                 job:{},
+                profile:{
+                    id:"",
+                    resume:"",
+                    skill:""
+                },
                 apply:{},
                 show:true,
                 sl:0,
@@ -140,23 +145,31 @@
                 this.form.reset();
             },
             jobApply(){
-                //send to server
-                axios.get('/api/jobapply/'+this.$route.params.id)
-                .then(()=>{
-                    Fire.$emit('AfterCreated');
+                
+
+                if(this.profile.resume == null){
                     swal.fire(
-                    'Applied!',
-                    'success'
-                    )
-                })
-                .catch(()=>{
-                    swal.fire(
-                        'Failed!',
-                        'Something wrong here.',
-                        'error'
+                            'Failed!',
+                            'Please Upload your resume by Profile Menu',
+                            )
+                }else{
+                    axios.get('/api/jobapply/'+this.$route.params.id)
+                    .then(()=>{
+                        Fire.$emit('AfterCreated');
+                        swal.fire(
+                        'Applied!',
+                        'success'
                         )
-                })
-                this.loadjobs();
+                    })
+                    .catch(()=>{
+                        swal.fire(
+                            'Failed!',
+                            'Something wrong here.',
+                            'error'
+                            )
+                    })
+                    this.loadjobs();
+                }
             },
             deletejob(id){
                 swal.fire({
@@ -230,6 +243,11 @@
                  axios.get('/api/jobapplyCheck/'+this.$route.params.id)
                  .then(response => {
                         this.apply = response.data;
+                    });
+
+                axios.get('/api/profileInfo')
+                 .then(response => {
+                        this.profile = response.data;
                     });
             }
         },

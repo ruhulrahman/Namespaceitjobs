@@ -30,6 +30,8 @@ Route::get('profile', 'API\UserController@profile');
 Route::put('profile', 'API\UserController@updateProfile');
 Route::get('jobpostByAuth', 'API\JobPostController@jobpostByAuth');
 
+Route::get('profileInfo', 'API\ProfileController@profileInfo');
+
 //JOb Apply Check
 Route::get('jobapplyCheck/{id}', 'API\JobApplyController@jobapplyCheck');
 Route::get('jobapplicants/{id}', 'API\JobApplyController@jobapplicants');

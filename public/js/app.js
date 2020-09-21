@@ -2761,6 +2761,11 @@ __webpack_require__.r(__webpack_exports__);
     return {
       editMode: false,
       job: {},
+      profile: {
+        id: "",
+        resume: "",
+        skill: ""
+      },
       apply: {},
       show: true,
       sl: 0
@@ -2801,14 +2806,17 @@ __webpack_require__.r(__webpack_exports__);
       this.form.reset();
     },
     jobApply: function jobApply() {
-      //send to server
-      axios.get('/api/jobapply/' + this.$route.params.id).then(function () {
-        Fire.$emit('AfterCreated');
-        swal.fire('Applied!', 'success');
-      })["catch"](function () {
-        swal.fire('Failed!', 'Something wrong here.', 'error');
-      });
-      this.loadjobs();
+      if (this.profile.resume == null) {
+        swal.fire('Failed!', 'Please Upload your resume by Profile Menu');
+      } else {
+        axios.get('/api/jobapply/' + this.$route.params.id).then(function () {
+          Fire.$emit('AfterCreated');
+          swal.fire('Applied!', 'success');
+        })["catch"](function () {
+          swal.fire('Failed!', 'Something wrong here.', 'error');
+        });
+        this.loadjobs();
+      }
     },
     deletejob: function deletejob(id) {
       swal.fire({
@@ -2872,6 +2880,9 @@ __webpack_require__.r(__webpack_exports__);
       });
       axios.get('/api/jobapplyCheck/' + this.$route.params.id).then(function (response) {
         _this4.apply = response.data;
+      });
+      axios.get('/api/profileInfo').then(function (response) {
+        _this4.profile = response.data;
       });
     }
   },
@@ -79280,8 +79291,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! H:\laragon\www\namespaceitjobs\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! H:\laragon\www\namespaceitjobs\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! H:\laragon\www\Namespaceitjobs\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! H:\laragon\www\Namespaceitjobs\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
