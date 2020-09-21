@@ -71,8 +71,8 @@
                                 <hr>
 
                                  
-                                 <ul v-for="(user, index) in applicants.user" :key="index">
-                                     <li><router-link :to="/user-details/+user.id">{{ user.first_name }}</router-link></li>
+                                 <ul v-for="(applicant, index) in applicants" :key="index">
+                                     <li>{{ index+1 }} <router-link :to="/applicant-details/+applicant.user.id">{{ applicant.user.first_name+ " "+applicant.user.last_name }}</router-link></li>
                                  </ul>
               </div>
               </div>

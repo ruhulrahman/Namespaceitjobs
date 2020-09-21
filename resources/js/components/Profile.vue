@@ -40,7 +40,7 @@
                     <p class="text-muted text-center">{{ this.form.type | capsText }}</p>
 
 
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" enctype="multipart/form-data">
                       <div class="form-group row">
                         <label for="first_name" class="col-sm-2 col-form-label">First Name</label>
                         <div class="col-sm-10">
@@ -66,12 +66,9 @@
                       </div>
 
                       <div class="form-group row">
-                        <label for="last_name" class="col-sm-2 col-form-label">resume</label>
+                        <label for="resumeUploads" class="col-sm-2 col-form-label">resume</label>
                         <div class="col-sm-10">
-                          <input type="file" @change="previewProfilePhoto" class="form-control-file" id="inputProfilePhoto">
-
-                          <input type="text" v-model="profile_form.resume" class="form-control" id="resume" placeholder="resume" :class="{ 'is-invalid': profile_form.errors.has('resume') }">
-                          <has-error :form="profile_form" field="resume"></has-error>
+                          <input type="file" @change="resumeUpload" class="form-control-file" id="resumeUploads">
                         </div>
                       </div>
 
@@ -144,6 +141,23 @@
             }
         },
         methods: {
+            resumeUpload(e) {
+                let file = e.target.files[0];
+                let reader = new FileReader();
+                console.log(file);
+                if(file['size'] < 2097152){
+                  reader.onloadend = (file) => {
+                      this.profile_form.resume = reader.result;
+                  }
+                  reader.readAsDataURL(file);
+                }else{
+                  swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'File size more than 2MB!',
+                  })
+                }
+            },
             getProfilePhoto(){
                let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/"+this.form.photo;
                 return photo;
