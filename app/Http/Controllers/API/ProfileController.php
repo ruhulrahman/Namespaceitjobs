@@ -28,7 +28,7 @@ class ProfileController extends Controller
 
     public function profileInfo(){
         $user_id = auth("api")->user()->id;
-        return Profile::where('user_id', $user_id)->get();
+        return Profile::where('user_id', $user_id)->first();
     }
 
 
