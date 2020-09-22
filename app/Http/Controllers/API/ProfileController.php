@@ -73,25 +73,13 @@ class ProfileController extends Controller
         $currentresume = $profile->resume;
         if($request->resume != $currentresume){
             $name = time().'.'.explode("/", explode(":", substr($request->resume, 0, strpos($request->resume, ';'))) [1])[1];
-            // $request->resume->save(public_path('files/').$name;
-            // Storage::putFile($name, new File(public_path('files/')));
-            // ($request->resume)->save(public_path('uploads/').$name);
-            // $file = $request->resume;
-            if($file){
-                $destinationPath = 'uploads'; // upload path
-                // $file->move($destinationPath, $name);
-                Storage::putFileAs($file, new File($destinationPath), $name);
-            }else{
-                return 'file not found';
-            }
-            
-            // $insert['file'] = "$profilefile";
+            Image::make($request->resume)->save(public_path('uploads/').$name);
 
             $request->merge(['resume' => $name]);
 
-            $userresume = public_path('uploads/').$currentresume;
-            if(file_exists($userresume)){
-                @unlink($userresume);
+            $profileresume = public_path('uploads/').$currentresume;
+            if(file_exists($profileresume)){
+                @unlink($profileresume);
             }
         }
 
