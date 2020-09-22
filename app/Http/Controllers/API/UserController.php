@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         // $this->authorize('isAdmin');
-        if (Gate::allows('isAdmin')) {
+        if (Gate::allows('isAdmin') || Gate::allows('isEmployee') || Gate::allows('isEmployer')) {
             // The current user can edit
             return User::latest()->paginate(15);
         }

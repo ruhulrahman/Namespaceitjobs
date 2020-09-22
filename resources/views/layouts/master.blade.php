@@ -83,6 +83,8 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+
+          @canany(['isEmployer'])
           <li class="nav-item">
             <router-link to="/dashboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt pink"></i>
@@ -91,7 +93,9 @@
               </p>
             </router-link>
           </li>
+          @endcanany
 
+          @canany(['isEmployee'])
           <li class="nav-item">
             <router-link to="/profile" class="nav-link">
               <i class="nav-icon fas fa-user default"></i>
@@ -100,7 +104,9 @@
               </p>
             </router-link>
           </li>
+          @endcanany
 
+          @canany(['isEmployer'])
           <li class="nav-item">
             <router-link to="/job-post" class="nav-link">
               <i class="nav-icon fas fa-user default"></i>
@@ -109,7 +115,9 @@
               </p>
             </router-link>
           </li>
+          @endcanany
           
+          @canany(['isEmployee'])
           <li class="nav-item">
             <router-link to="/find-job" class="nav-link">
               <i class="nav-icon fas fa-user default"></i>
@@ -118,9 +126,10 @@
               </p>
             </router-link>
           </li>
+          @endcanany
           
 
-          @canany(['isAdmin','isAuthor', 'isSuperAdmin'])
+          @canany(['isAdmin'])
           <li class="nav-item">
             <router-link to="/developer" class="nav-link">
               <i class="nav-icon fas fa-user orange"></i>
@@ -131,7 +140,7 @@
           </li>
           @endcanany
           
-          @canany(['isAdmin','isEmployer', 'isEmployee'])
+          @canany(['isAdmin'])
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-cog blue"></i>
