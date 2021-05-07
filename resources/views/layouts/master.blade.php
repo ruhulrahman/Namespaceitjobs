@@ -104,6 +104,14 @@
               </p>
             </router-link>
           </li>
+          <li class="nav-item">
+            <router-link to="/cv-profile" class="nav-link">
+              <i class="nav-icon fas fa-user default"></i>
+              <p>
+                CV Profile
+              </p>
+            </router-link>
+          </li>
           @endcanany
 
           @canany(['isEmployer'])

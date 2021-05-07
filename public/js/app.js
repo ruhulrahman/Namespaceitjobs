@@ -2340,6 +2340,159 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CvProfile.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CvProfile.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      profile_form: new Form({
+        id: '',
+        user_id: '',
+        resume: '',
+        skills: ''
+      })
+    };
+  },
+  methods: {
+    resumeUpload: function resumeUpload(e) {
+      var _this = this;
+
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      console.log(file);
+
+      if (file['size'] < 2097152) {
+        reader.onloadend = function (file) {
+          _this.profile_form.resume = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'File size more than 2MB!'
+        });
+      }
+    },
+    updateProfile: function updateProfile() {
+      var _this2 = this;
+
+      this.$Progress.start();
+      var self = this;
+      self.profile_form.resume = document.getElementById('resumeId').files[0].name;
+      self.profile_form.size = document.getElementById('resumeId').files[0].size; // var formData = new FormData();
+
+      var file = document.getElementById('resumeId').files[0];
+      this.profile_form.append('file', file);
+      axios.put("api/employeeResume/" + this.profile_form.id, this.profile_form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function () {
+        toast.fire({
+          icon: 'success',
+          title: 'Profile updated successfully'
+        });
+
+        _this2.$Progress.finish();
+      })["catch"](function () {
+        _this2.$Progress.fail();
+      });
+    }
+  },
+  created: function created() {
+    var _this3 = this;
+
+    axios.get('api/userprofile').then(function (_ref) {
+      var data = _ref.data;
+
+      _this3.profile_form.fill(data);
+    });
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.');
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Dashboard.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Dashboard.vue?vue&type=script&lang=js& ***!
@@ -3539,6 +3692,7 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         user_id: '',
         resume: '',
+        size: '',
         skills: ''
       })
     };
@@ -3583,7 +3737,17 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function () {
         _this2.$Progress.fail();
       });
-      this.profile_form.put("api/userprofile/" + this.profile_form.id).then(function () {
+      var self = this;
+      self.profile_form.resume = document.getElementById('resumeId').files[0].name;
+      self.profile_form.size = document.getElementById('resumeId').files[0].size; // var formData = new FormData();
+
+      var file = document.getElementById('resumeId').files[0];
+      this.profile_form.append('file', file);
+      axios.put("api/userprofile/" + this.profile_form.id, this.profile_form, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      }).then(function () {
         toast.fire({
           icon: 'success',
           title: 'Profile updated successfully'
@@ -61597,6 +61761,129 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CvProfile.vue?vue&type=template&id=64499cdb&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CvProfile.vue?vue&type=template&id=64499cdb& ***!
+  \************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c(
+                "li",
+                { staticClass: "breadcrumb-item" },
+                [
+                  _c("router-link", { attrs: { to: "/dashboard" } }, [
+                    _vm._v("Home")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Profile")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-body" }, [
+                _c("div", {}, [
+                  _c("div", {}, [
+                    _c(
+                      "form",
+                      {
+                        staticClass: "form-horizontal",
+                        attrs: { enctype: "multipart/form-data" }
+                      },
+                      [
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "col-sm-2 col-form-label",
+                              attrs: { for: "resumeUploads" }
+                            },
+                            [_vm._v("resume")]
+                          ),
+                          _vm._v(" "),
+                          _c("div", { staticClass: "col-sm-10" }, [
+                            _c("input", {
+                              staticClass: "form-control-file",
+                              attrs: { type: "file", id: "resumeId" },
+                              on: { change: _vm.resumeUpload }
+                            })
+                          ])
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "form-group row" }, [
+                          _c("div", { staticClass: "offset-sm-2 col-sm-10" }, [
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "submit" },
+                                on: {
+                                  click: function($event) {
+                                    $event.preventDefault()
+                                    return _vm.updateProfile($event)
+                                  }
+                                }
+                              },
+                              [_vm._v("Update")]
+                            )
+                          ])
+                        ])
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("h1", { staticClass: "m-0 text-dark" }, [_vm._v("Profile")])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Dashboard.vue?vue&type=template&id=040e2ab9&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Dashboard.vue?vue&type=template&id=040e2ab9& ***!
@@ -63596,7 +63883,7 @@ var render = function() {
                           _c("div", { staticClass: "col-sm-10" }, [
                             _c("input", {
                               staticClass: "form-control-file",
-                              attrs: { type: "file", id: "resumeUploads" },
+                              attrs: { type: "file", id: "resumeId" },
                               on: { change: _vm.resumeUpload }
                             })
                           ])
@@ -78966,6 +79253,9 @@ var routes = [{
   path: '/profile',
   component: __webpack_require__(/*! ./components/Profile.vue */ "./resources/js/components/Profile.vue")["default"]
 }, {
+  path: '/cv-profile',
+  component: __webpack_require__(/*! ./components/CvProfile.vue */ "./resources/js/components/CvProfile.vue")["default"]
+}, {
   path: '/job-post',
   component: __webpack_require__(/*! ./components/JobPost.vue */ "./resources/js/components/JobPost.vue")["default"]
 }, {
@@ -79231,6 +79521,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ApplicantsView_vue_vue_type_template_id_3e0e9fbe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ApplicantsView_vue_vue_type_template_id_3e0e9fbe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/CvProfile.vue":
+/*!***********************************************!*\
+  !*** ./resources/js/components/CvProfile.vue ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _CvProfile_vue_vue_type_template_id_64499cdb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CvProfile.vue?vue&type=template&id=64499cdb& */ "./resources/js/components/CvProfile.vue?vue&type=template&id=64499cdb&");
+/* harmony import */ var _CvProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CvProfile.vue?vue&type=script&lang=js& */ "./resources/js/components/CvProfile.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _CvProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _CvProfile_vue_vue_type_template_id_64499cdb___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _CvProfile_vue_vue_type_template_id_64499cdb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/CvProfile.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/CvProfile.vue?vue&type=script&lang=js&":
+/*!************************************************************************!*\
+  !*** ./resources/js/components/CvProfile.vue?vue&type=script&lang=js& ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CvProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./CvProfile.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CvProfile.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CvProfile_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/CvProfile.vue?vue&type=template&id=64499cdb&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/components/CvProfile.vue?vue&type=template&id=64499cdb& ***!
+  \******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CvProfile_vue_vue_type_template_id_64499cdb___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./CvProfile.vue?vue&type=template&id=64499cdb& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CvProfile.vue?vue&type=template&id=64499cdb&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CvProfile_vue_vue_type_template_id_64499cdb___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CvProfile_vue_vue_type_template_id_64499cdb___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

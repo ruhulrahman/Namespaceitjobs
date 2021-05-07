@@ -68,21 +68,35 @@ class ProfileController extends Controller
             'skills' => 'string',            
             // 'resume'  => 'mimes:docx,pdf'
         ]);
-        $file = $request->resume;
 
-        $currentresume = $profile->resume;
-        if($request->resume != $currentresume){
-            $name = time().'.'.explode("/", explode(":", substr($request->resume, 0, strpos($request->resume, ';'))) [1])[1];
-            Image::make($request->resume)->save(public_path('uploads/').$name);
+        // $request->file->storeAs('uploads', 'test.pdf');
+        // $file = $request->resume;
 
-            $request->merge(['resume' => $name]);
+        // $currentresume = $profile->resume;
+        // if($request->resume != $currentresume){
+        //     $name = time().'.'.explode("/", explode(":", substr($request->resume, 0, strpos($request->resume, ';'))) [1])[1];
+        //     Image::make($request->resume)->save(public_path('uploads/').$name);
 
-            $profileresume = public_path('uploads/').$currentresume;
-            if(file_exists($profileresume)){
-                @unlink($profileresume);
-            }
-        }
+        //     $request->merge(['resume' => $name]);
 
+        //     $profileresume = public_path('uploads/').$currentresume;
+        //     if(file_exists($profileresume)){
+        //         @unlink($profileresume);
+        //     }
+        // }
+
+        $profile->update($request->all());  
+    }
+
+
+    public function employeeResume(Request $request, $id)
+    {
+        $profile = Profile::findOrFail($id);
+
+        $this->validate($request, [       
+            // 'resume'  => 'mimes:docx,pdf'
+        ]);
+        $request->file('resume')->store('uploads');
         $profile->update($request->all());  
     }
 

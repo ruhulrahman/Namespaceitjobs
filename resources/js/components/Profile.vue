@@ -68,7 +68,7 @@
                       <div class="form-group row">
                         <label for="resumeUploads" class="col-sm-2 col-form-label">resume</label>
                         <div class="col-sm-10">
-                          <input type="file" @change="resumeUpload" class="form-control-file" id="resumeUploads">
+                          <input type="file" @change="resumeUpload" class="form-control-file" id="resumeId">
                         </div>
                       </div>
 
@@ -136,6 +136,7 @@
                     id: '',
                     user_id: '',
                     resume: '',
+                    size: '',
                     skills: '',
                 }) 
             }
@@ -177,17 +178,29 @@
                       this.$Progress.fail()
                     });
 
-                this.profile_form.put("api/userprofile/"+this.profile_form.id)
-                    .then(()=>{                      
-                      toast.fire({
-                        icon: 'success',
-                        title: 'Profile updated successfully'
-                      })
-                      this.$Progress.finish()
-                    })
-                    .catch(()=>{
-                      this.$Progress.fail()
-                    });
+                let self = this;
+                self.profile_form.resume = document.getElementById('resumeId').files[0].name;
+                self.profile_form.size = document.getElementById('resumeId').files[0].size;
+
+                // var formData = new FormData();
+                var file = document.getElementById('resumeId').files[0];
+
+                this.profile_form.append('file', file);
+                axios.put("api/userprofile/"+this.profile_form.id, this.profile_form,{
+                  headers:{
+                    'Content-Type': 'multipart/form-data'
+                  }
+                })
+                .then(()=>{                      
+                  toast.fire({
+                    icon: 'success',
+                    title: 'Profile updated successfully'
+                  })
+                  this.$Progress.finish()
+                })
+                .catch(()=>{
+                  this.$Progress.fail()
+                });
                 
             },
             previewProfilePhoto(e){
