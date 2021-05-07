@@ -65,6 +65,7 @@ let routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     // { path: '/users', component: require('./components/Users.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
+    { path: '/blood', component: require('./components/Blood.vue').default },
     { path: '/cv-profile', component: require('./components/CvProfile.vue').default },
     { path: '/job-post', component: require('./components/JobPost.vue').default },
     { path: '/find-job', component: require('./components/FindJob.vue').default },

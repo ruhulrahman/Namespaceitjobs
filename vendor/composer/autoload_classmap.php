@@ -6,8 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Blood' => $baseDir . '/app/Blood.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
+    'App\\Http\\Controllers\\API\\BloodController' => $baseDir . '/app/Http/Controllers/API/BloodController.php',
+    'App\\Http\\Controllers\\API\\JobApplyController' => $baseDir . '/app/Http/Controllers/API/JobApplyController.php',
     'App\\Http\\Controllers\\API\\JobPostController' => $baseDir . '/app/Http/Controllers/API/JobPostController.php',
     'App\\Http\\Controllers\\API\\ProfileController' => $baseDir . '/app/Http/Controllers/API/ProfileController.php',
     'App\\Http\\Controllers\\API\\UserController' => $baseDir . '/app/Http/Controllers/API/UserController.php',
@@ -71,6 +74,7 @@ return array(
     'Carbon\\Traits\\Units' => $vendorDir . '/nesbot/carbon/src/Carbon/Traits/Units.php',
     'Carbon\\Traits\\Week' => $vendorDir . '/nesbot/carbon/src/Carbon/Traits/Week.php',
     'Carbon\\Translator' => $vendorDir . '/nesbot/carbon/src/Carbon/Translator.php',
+    'Composer\\InstalledVersions' => $vendorDir . '/composer/InstalledVersions.php',
     'Cron\\AbstractField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/AbstractField.php',
     'Cron\\CronExpression' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/CronExpression.php',
     'Cron\\DayOfMonthField' => $vendorDir . '/dragonmantank/cron-expression/src/Cron/DayOfMonthField.php',
@@ -3200,7 +3204,6 @@ return array(
     'Psr\\Log\\LoggerInterface' => $vendorDir . '/psr/log/Psr/Log/LoggerInterface.php',
     'Psr\\Log\\LoggerTrait' => $vendorDir . '/psr/log/Psr/Log/LoggerTrait.php',
     'Psr\\Log\\NullLogger' => $vendorDir . '/psr/log/Psr/Log/NullLogger.php',
-    'Psr\\Log\\Test\\DummyTest' => $vendorDir . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
     'Psr\\Log\\Test\\LoggerInterfaceTest' => $vendorDir . '/psr/log/Psr/Log/Test/LoggerInterfaceTest.php',
     'Psr\\Log\\Test\\TestLogger' => $vendorDir . '/psr/log/Psr/Log/Test/TestLogger.php',
     'Psr\\SimpleCache\\CacheException' => $vendorDir . '/psr/simple-cache/src/CacheException.php',
@@ -3679,7 +3682,6 @@ return array(
     'Symfony\\Component\\EventDispatcher\\Debug\\TraceableEventDispatcherInterface' => $vendorDir . '/symfony/event-dispatcher/Debug/TraceableEventDispatcherInterface.php',
     'Symfony\\Component\\EventDispatcher\\Debug\\WrappedListener' => $vendorDir . '/symfony/event-dispatcher/Debug/WrappedListener.php',
     'Symfony\\Component\\EventDispatcher\\DependencyInjection\\AddEventAliasesPass' => $vendorDir . '/symfony/event-dispatcher/DependencyInjection/AddEventAliasesPass.php',
-    'Symfony\\Component\\EventDispatcher\\DependencyInjection\\ExtractingEventDispatcher' => $vendorDir . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
     'Symfony\\Component\\EventDispatcher\\DependencyInjection\\RegisterListenersPass' => $vendorDir . '/symfony/event-dispatcher/DependencyInjection/RegisterListenersPass.php',
     'Symfony\\Component\\EventDispatcher\\Event' => $vendorDir . '/symfony/event-dispatcher/Event.php',
     'Symfony\\Component\\EventDispatcher\\EventDispatcher' => $vendorDir . '/symfony/event-dispatcher/EventDispatcher.php',
@@ -4057,7 +4059,6 @@ return array(
     'Symfony\\Component\\Routing\\Loader\\ObjectLoader' => $vendorDir . '/symfony/routing/Loader/ObjectLoader.php',
     'Symfony\\Component\\Routing\\Loader\\ObjectRouteLoader' => $vendorDir . '/symfony/routing/Loader/ObjectRouteLoader.php',
     'Symfony\\Component\\Routing\\Loader\\PhpFileLoader' => $vendorDir . '/symfony/routing/Loader/PhpFileLoader.php',
-    'Symfony\\Component\\Routing\\Loader\\ProtectedPhpFileLoader' => $vendorDir . '/symfony/routing/Loader/PhpFileLoader.php',
     'Symfony\\Component\\Routing\\Loader\\XmlFileLoader' => $vendorDir . '/symfony/routing/Loader/XmlFileLoader.php',
     'Symfony\\Component\\Routing\\Loader\\YamlFileLoader' => $vendorDir . '/symfony/routing/Loader/YamlFileLoader.php',
     'Symfony\\Component\\Routing\\Matcher\\CompiledUrlMatcher' => $vendorDir . '/symfony/routing/Matcher/CompiledUrlMatcher.php',

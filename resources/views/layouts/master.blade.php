@@ -105,6 +105,14 @@
             </router-link>
           </li>
           <li class="nav-item">
+            <router-link to="/blood" class="nav-link">
+              <i class="nav-icon fas fa-user default"></i>
+              <p>
+                Blood
+              </p>
+            </router-link>
+          </li>
+          <li class="nav-item">
             <router-link to="/cv-profile" class="nav-link">
               <i class="nav-icon fas fa-user default"></i>
               <p>

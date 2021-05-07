@@ -89,15 +89,32 @@ class ProfileController extends Controller
     }
 
 
-    public function employeeResume(Request $request, $id)
+    public function employeeResume(Request $request)
     {
-        $profile = Profile::findOrFail($id);
+        $user = auth('api')->user();
+        $profile = Profile::where('user_id', $user->id)->first();
 
         $this->validate($request, [       
             // 'resume'  => 'mimes:docx,pdf'
         ]);
-        $request->file('resume')->store('uploads');
+        $currentresume = $profile->resume;
+        $resume = $request->resume;
+        $name = time().'.'.explode("/", explode(":", substr($request->resume, 0, strpos($request->resume, ';'))) [1])[1];
+        // $request->resume->storeAs(public_path('uploads/').$name);
+        
+
+        $request->merge(['resume' => $name]);
+
+        // $userresume = public_path('uploads/').$currentresume;
+        // if(file_exists($userresume)){
+        //     @unlink($userresume);
+        // }
+        // $resume->move(public_path('uploads/').$name);
+        $path = Storage::putFile('uploads/', $resume);
         $profile->update($request->all());  
+
+
+        return $path;
     }
 
 

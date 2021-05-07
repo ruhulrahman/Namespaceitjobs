@@ -2340,6 +2340,286 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Blood.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Blood.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      editMode: false,
+      bloods: {},
+      sl: 0,
+      entryData: new Form({
+        id: '',
+        blood_name: '',
+        blood_name_bn: ''
+      })
+    };
+  },
+  methods: {
+    print: function print() {
+      window.print();
+    },
+    // Our method to GET results from a Laravel endpoint
+    getResults: function getResults() {
+      var _this = this;
+
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      axios.get('api/jobpost?page=' + page).then(function (response) {
+        _this.jobs = response.data;
+      });
+    },
+    udpateBlood: function udpateBlood() {
+      var _this2 = this;
+
+      this.$Progress.start(); //Server request
+
+      this.entryData.put('api/blood/' + this.entryData.id).then(function () {
+        Fire.$emit('AfterCreated');
+        $('#addNewModal').modal('hide');
+        toast.fire({
+          icon: 'success',
+          title: 'job updated successfully'
+        });
+
+        _this2.$Progress.finish();
+      })["catch"](function () {
+        _this2.$Progress.fail();
+      });
+    },
+    resetData: function resetData() {
+      this.form.reset();
+    },
+    deleteBlood: function deleteBlood(id) {
+      swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.value) {
+          //send to server
+          axios["delete"]('api/blood/' + id).then(function () {
+            Fire.$emit('AfterDeleted');
+            swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+          })["catch"](function () {
+            swal.fire('Failed!', 'Something wrong here.', 'error');
+          });
+        }
+      });
+    },
+    addNewjobModalOpen: function addNewjobModalOpen() {
+      this.editMode = false;
+      this.entryData.reset();
+      $('#addNewModal').modal('show');
+    },
+    edit: function edit(item) {
+      this.editMode = true;
+      this.entryData.reset();
+      $('#addNewModal').modal('show');
+      this.entryData.fill(item);
+    },
+    createBlood: function createBlood() {
+      var _this3 = this;
+
+      this.$Progress.start();
+      this.entryData.post('api/blood').then(function () {
+        Fire.$emit('AfterCreated');
+        $('#addNewModal').modal('hide');
+        toast.fire({
+          icon: 'success',
+          title: 'Blood Created successfully'
+        });
+
+        _this3.$Progress.finish();
+
+        _this3.form.reset();
+      })["catch"](function () {
+        toast.fire({
+          icon: 'warning',
+          title: 'Blood didn\'t created'
+        });
+      });
+    },
+    loadblood: function loadblood() {
+      var _this4 = this;
+
+      axios.get('api/blood').then(function (response) {
+        _this4.bloods = response.data;
+      });
+    }
+  },
+  created: function created() {
+    var _this5 = this;
+
+    Fire.$on("searching", function () {
+      var query = _this5.$parent.search;
+      axios.get('api/findjob?q=' + query).then(function (data) {
+        _this5.jobs = data.data;
+      })["catch"](function () {});
+    });
+    this.loadblood(); //setInterval(() => { this.loadblood(); }, 500);
+
+    Fire.$on('AfterCreated', function () {
+      _this5.loadblood();
+    });
+    Fire.$on('AfterDeleted', function () {
+      _this5.loadblood();
+    });
+  },
+  mounted: function mounted() {
+    console.log('Component mounted.'); // Fetch initial results
+    //this.getResults();
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CvProfile.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CvProfile.vue?vue&type=script&lang=js& ***!
@@ -2455,17 +2735,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.$Progress.start();
-      var self = this;
-      self.profile_form.resume = document.getElementById('resumeId').files[0].name;
-      self.profile_form.size = document.getElementById('resumeId').files[0].size; // var formData = new FormData();
-
-      var file = document.getElementById('resumeId').files[0];
-      this.profile_form.append('file', file);
-      axios.put("api/employeeResume/" + this.profile_form.id, this.profile_form, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      }).then(function () {
+      this.profile_form.put("api/employeeResume").then(function () {
         toast.fire({
           icon: 'success',
           title: 'Profile updated successfully'
@@ -61761,6 +62031,468 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Blood.vue?vue&type=template&id=1a6eb19f&":
+/*!********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Blood.vue?vue&type=template&id=1a6eb19f& ***!
+  \********************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "content-wrapper" }, [
+    _c("div", { staticClass: "content-header" }, [
+      _c("div", { staticClass: "container-fluid" }, [
+        _c("div", { staticClass: "row mb-2" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-6" }, [
+            _c("ol", { staticClass: "breadcrumb float-sm-right" }, [
+              _c(
+                "li",
+                { staticClass: "breadcrumb-item" },
+                [
+                  _c("router-link", { attrs: { to: "/dashboard" } }, [
+                    _vm._v("Dashboard")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("li", { staticClass: "breadcrumb-item active" }, [
+                _vm._v("Blood")
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("section", { staticClass: "content" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c("div", { staticClass: "col-12" }, [
+            _c("div", { staticClass: "card" }, [
+              _c("div", { staticClass: "card-header print-hide" }, [
+                _c("h3", { staticClass: "card-title green" }, [_vm._v("Jobs")]),
+                _vm._v(" "),
+                _c("div", { staticClass: "card-tools" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-success",
+                      attrs: { type: "button" },
+                      on: { click: _vm.addNewjobModalOpen }
+                    },
+                    [
+                      _vm._v(" Add New Blood\n\n                      "),
+                      _c("i", { staticClass: "fab fa-bandcamp" })
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-body" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "dataTables_wrapper dt-bootstrap4",
+                    attrs: { id: "example1_wrapper" }
+                  },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-sm-12 col-md-6" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "print-hide float-right mb-3",
+                            on: {
+                              click: function($event) {
+                                return _vm.print()
+                              }
+                            }
+                          },
+                          [_vm._v("Print")]
+                        )
+                      ])
+                    ])
+                  ]
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-sm-12" }, [
+                    _c(
+                      "table",
+                      {
+                        staticClass:
+                          "table table-bordered table-striped dataTable table-head-fixed",
+                        attrs: {
+                          id: "example1",
+                          role: "grid",
+                          "aria-describedby": "example1_info"
+                        }
+                      },
+                      [
+                        _vm._m(2),
+                        _vm._v(" "),
+                        _c(
+                          "tbody",
+                          _vm._l(_vm.bloods, function(blood, index) {
+                            return _c(
+                              "tr",
+                              {
+                                key: index,
+                                staticClass: "odd",
+                                attrs: { role: "row" }
+                              },
+                              [
+                                _c("td", [_vm._v(_vm._s(index + 1))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(blood.blood_name))]),
+                                _vm._v(" "),
+                                _c("td", [_vm._v(_vm._s(blood.blood_name_bn))]),
+                                _vm._v(" "),
+                                _c("td", [
+                                  _c(
+                                    "button",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.edit(blood)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Edit")]
+                                  ),
+                                  _vm._v(" || \n                          "),
+                                  _c(
+                                    "button",
+                                    {
+                                      on: {
+                                        click: function($event) {
+                                          return _vm.deleteBlood(blood.id)
+                                        }
+                                      }
+                                    },
+                                    [_vm._v("Delete")]
+                                  )
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "modal fade",
+            attrs: {
+              id: "addNewModal",
+              tabindex: "-1",
+              role: "dialog",
+              "aria-labelledby": "addNewModalTitle",
+              "aria-hidden": "true"
+            }
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "modal-dialog modal-dialog-centered",
+                attrs: { role: "document" }
+              },
+              [
+                _c("div", { staticClass: "modal-content" }, [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          $event.preventDefault()
+                          _vm.editMode ? _vm.udpateBlood() : _vm.createBlood()
+                        },
+                        keydown: function($event) {
+                          return _vm.form.onKeydown($event)
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "modal-header  bg-success" }, [
+                        _c(
+                          "h5",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.editMode,
+                                expression: "!editMode"
+                              }
+                            ],
+                            staticClass: "modal-title",
+                            attrs: { id: "addNewModalTitle" }
+                          },
+                          [_vm._v("New Blood")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "h5",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.editMode,
+                                expression: "editMode"
+                              }
+                            ],
+                            staticClass: "modal-title",
+                            attrs: { id: "addNewModalTitle" }
+                          },
+                          [_vm._v("Edit Blood")]
+                        ),
+                        _vm._v(" "),
+                        _vm._m(3)
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", [_vm._v("Blood Name")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.entryData.blood_name,
+                                  expression: "entryData.blood_name"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.entryData.errors.has(
+                                  "blood_name"
+                                )
+                              },
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.entryData.blood_name },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.entryData,
+                                    "blood_name",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: {
+                                form: _vm.entryData,
+                                field: "blood_name"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group" },
+                          [
+                            _c("label", [_vm._v("Blood Name (Bn)")]),
+                            _vm._v(" "),
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.entryData.blood_name_bn,
+                                  expression: "entryData.blood_name_bn"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.entryData.errors.has(
+                                  "blood_name_bn"
+                                )
+                              },
+                              attrs: { type: "text" },
+                              domProps: { value: _vm.entryData.blood_name_bn },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.entryData,
+                                    "blood_name_bn",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: {
+                                form: _vm.entryData,
+                                field: "blood_name_bn"
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "modal-footer" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-warning",
+                            attrs: { type: "button" },
+                            on: { click: _vm.resetData }
+                          },
+                          [_vm._v("Reset")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-danger",
+                            attrs: { type: "button", "data-dismiss": "modal" }
+                          },
+                          [_vm._v("Close")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: _vm.editMode,
+                                expression: "editMode"
+                              }
+                            ],
+                            staticClass: "btn btn-success",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Update")]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            directives: [
+                              {
+                                name: "show",
+                                rawName: "v-show",
+                                value: !_vm.editMode,
+                                expression: "!editMode"
+                              }
+                            ],
+                            staticClass: "btn btn-primary",
+                            attrs: { type: "submit" }
+                          },
+                          [_vm._v("Create")]
+                        )
+                      ])
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-6" }, [
+      _c("h1", { staticClass: "m-0 text-dark" }, [_vm._v("Blood")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-sm-12 col-md-6" }, [
+      _c("div", {
+        staticClass: "dataTables_length",
+        attrs: { id: "example1_length" }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", { staticClass: "purple", attrs: { role: "row" } }, [
+        _c("th", [_vm._v("SL")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Blood Name")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Blood Name Bn")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Modify")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/CvProfile.vue?vue&type=template&id=64499cdb&":
 /*!************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/CvProfile.vue?vue&type=template&id=64499cdb& ***!
@@ -61812,52 +62544,45 @@ var render = function() {
               _c("div", { staticClass: "card-body" }, [
                 _c("div", {}, [
                   _c("div", {}, [
-                    _c(
-                      "form",
-                      {
-                        staticClass: "form-horizontal",
-                        attrs: { enctype: "multipart/form-data" }
-                      },
-                      [
-                        _c("div", { staticClass: "form-group row" }, [
-                          _c(
-                            "label",
-                            {
-                              staticClass: "col-sm-2 col-form-label",
-                              attrs: { for: "resumeUploads" }
-                            },
-                            [_vm._v("resume")]
-                          ),
-                          _vm._v(" "),
-                          _c("div", { staticClass: "col-sm-10" }, [
-                            _c("input", {
-                              staticClass: "form-control-file",
-                              attrs: { type: "file", id: "resumeId" },
-                              on: { change: _vm.resumeUpload }
-                            })
-                          ])
-                        ]),
+                    _c("form", { staticClass: "form-horizontal" }, [
+                      _c("div", { staticClass: "form-group row" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "col-sm-2 col-form-label",
+                            attrs: { for: "resumeUploads" }
+                          },
+                          [_vm._v("resume")]
+                        ),
                         _vm._v(" "),
-                        _c("div", { staticClass: "form-group row" }, [
-                          _c("div", { staticClass: "offset-sm-2 col-sm-10" }, [
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-primary",
-                                attrs: { type: "submit" },
-                                on: {
-                                  click: function($event) {
-                                    $event.preventDefault()
-                                    return _vm.updateProfile($event)
-                                  }
-                                }
-                              },
-                              [_vm._v("Update")]
-                            )
-                          ])
+                        _c("div", { staticClass: "col-sm-10" }, [
+                          _c("input", {
+                            staticClass: "form-control-file",
+                            attrs: { type: "file", id: "resumeId" },
+                            on: { change: _vm.resumeUpload }
+                          })
                         ])
-                      ]
-                    )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "form-group row" }, [
+                        _c("div", { staticClass: "offset-sm-2 col-sm-10" }, [
+                          _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-primary",
+                              attrs: { type: "submit" },
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.updateProfile($event)
+                                }
+                              }
+                            },
+                            [_vm._v("Update")]
+                          )
+                        ])
+                      ])
+                    ])
                   ])
                 ])
               ])
@@ -79253,6 +79978,9 @@ var routes = [{
   path: '/profile',
   component: __webpack_require__(/*! ./components/Profile.vue */ "./resources/js/components/Profile.vue")["default"]
 }, {
+  path: '/blood',
+  component: __webpack_require__(/*! ./components/Blood.vue */ "./resources/js/components/Blood.vue")["default"]
+}, {
   path: '/cv-profile',
   component: __webpack_require__(/*! ./components/CvProfile.vue */ "./resources/js/components/CvProfile.vue")["default"]
 }, {
@@ -79521,6 +80249,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ApplicantsView_vue_vue_type_template_id_3e0e9fbe___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ApplicantsView_vue_vue_type_template_id_3e0e9fbe___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Blood.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Blood.vue ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Blood_vue_vue_type_template_id_1a6eb19f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Blood.vue?vue&type=template&id=1a6eb19f& */ "./resources/js/components/Blood.vue?vue&type=template&id=1a6eb19f&");
+/* harmony import */ var _Blood_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Blood.vue?vue&type=script&lang=js& */ "./resources/js/components/Blood.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Blood_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Blood_vue_vue_type_template_id_1a6eb19f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Blood_vue_vue_type_template_id_1a6eb19f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Blood.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Blood.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Blood.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Blood_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Blood.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Blood.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Blood_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Blood.vue?vue&type=template&id=1a6eb19f&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Blood.vue?vue&type=template&id=1a6eb19f& ***!
+  \**************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Blood_vue_vue_type_template_id_1a6eb19f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Blood.vue?vue&type=template&id=1a6eb19f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Blood.vue?vue&type=template&id=1a6eb19f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Blood_vue_vue_type_template_id_1a6eb19f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Blood_vue_vue_type_template_id_1a6eb19f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

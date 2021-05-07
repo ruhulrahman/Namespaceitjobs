@@ -33,7 +33,7 @@
                   <div class="">
 
 
-                    <form class="form-horizontal" enctype="multipart/form-data">
+                    <form class="form-horizontal">
 
                       <div class="form-group row">
                         <label for="resumeUploads" class="col-sm-2 col-form-label">resume</label>
@@ -98,31 +98,18 @@
                 }
             },
             updateProfile(){
-              this.$Progress.start()
-
-                let self = this;
-                self.profile_form.resume = document.getElementById('resumeId').files[0].name;
-                self.profile_form.size = document.getElementById('resumeId').files[0].size;
-
-                // var formData = new FormData();
-                var file = document.getElementById('resumeId').files[0];
-
-                this.profile_form.append('file', file);
-                axios.put("api/employeeResume/"+this.profile_form.id, this.profile_form,{
-                  headers:{
-                    'Content-Type': 'multipart/form-data'
-                  }
-                })
-                .then(()=>{                      
-                  toast.fire({
-                    icon: 'success',
-                    title: 'Profile updated successfully'
-                  })
-                  this.$Progress.finish()
-                })
-                .catch(()=>{
-                  this.$Progress.fail()
-                });
+             this.$Progress.start()
+                this.profile_form.put("api/employeeResume")
+                    .then(()=>{                      
+                      toast.fire({
+                        icon: 'success',
+                        title: 'Profile updated successfully'
+                      })
+                      this.$Progress.finish()
+                    })
+                    .catch(()=>{
+                      this.$Progress.fail()
+                    });
                 
             },
         },
